@@ -1,0 +1,73 @@
+-----------------------------------------------------------
+Snufkin's Custom Vehicles (A19 Stable) 27th of October 2020
+-----------------------------------------------------------
+Issue 1
+recipes.xml
+meleeThrownSpearSteelParts
+
+The dedicated server produces this warning:
+
+2020-10-09T15:20:45 111.077 ERR XML loader: Loading and parsing 'recipes.xml' failed
+2020-10-09T15:20:45 111.077 EXC No item/block/material with name 'meleeThrownSpearSteelParts' existing
+Exception: No item/block/material with name 'meleeThrownSpearSteelParts' existing
+  at RecipesFromXml+<LoadRecipies>d__1.MoveNext () [0x00499] in <9f04a0ee08f84f3794a7468a839f2bb0>:0 
+  at ThreadManager+<CoroutineWrapperWithExceptionCallback>d__40.MoveNext () [0x00044] in <9f04a0ee08f84f3794a7468a839f2bb0>:0 
+UnityEngine.DebugLogHandler:Internal_LogException(Exception, Object)
+UnityEngine.DebugLogHandler:LogException(Exception, Object)
+UnityEngine.Logger:LogException(Exception, Object)
+UnityEngine.Debug:LogException(Exception)
+Logger:masterLogException(Exception)
+Logger:Exception(Exception)
+Log:Exception(Exception)
+<>c__DisplayClass50_0:<loadSingleXml>b__2(Exception)
+<CoroutineWrapperWithExceptionCallback>d__40:MoveNext()
+UnityEngine.SetupCoroutine:InvokeMoveNext(IEnumerator, IntPtr)
+ 
+(Filename: <9f04a0ee08f84f3794a7468a839f2bb0> Line: 0)
+
+As the 'meleeThrownSpearSteelParts' no longer exists, it is commented out and replaced with 'meleeToolAllSteelParts' in
+
+recipes.xml
+recipe name="HellBeast"
+
+from
+
+<!--ingredient name="meleeThrownSpearSteelParts" count="10"/--> to
+<ingredient name="meleeToolAllSteelParts" count="10"/>
+
+--------------------------------
+Issue 2
+recipes.xml
+meleeToolWrench
+
+As with Issue 1 and with the same resolution.
+
+--------------------------------
+Issue 3
+recipes.xml
+gunJunkTurretParts
+
+As with Issue 1 and commented out and changed to:
+
+<ingredient name="gunBotRoboticsParts" count="40"/>
+
+--------------------------------
+Issue 4
+Xui warning about inventory for "CustonVehicles"
+
+2020-10-09T15:20:55 121.098 WRN XML patch for "XUi/windows.xml" from mod "CustonVehicles" did not apply: <set xpath="/windows/window[@name='windowVehicleStorage']/grid[@name='inventory']/@rows" 
+2020-10-09T15:20:55 121.098 WRN XML patch for "XUi/windows.xml" from mod "CustonVehicles" did not apply: <set xpath="/windows/window[@name='windowVehicleStorage']/grid[@name='inventory']/@cols" 
+
+Commented it all out.
+--------------------------------
+Issue 5 (Reported by h0tr0d and fixed by oakraven)
+Warning with collision for Army Truck
+
+Non-convex MeshCollider with non-kinematic Rigidbody is no longer supported since Unity 5.
+If you want to use a non-convex mesh either make the Rigidbody kinematic or remove the Rigidbody component. Scene hierarchy path "Entities/Cars/Army Truck_256087/Physics/Box1/tempPrefab_armyTruckPrefab/armyTruck", Mesh asset path "" Mesh name "army_truck_collider"
+
+Changed:
+items.xml
+<property name="Meshfile" value="#Entities/Vehicles?Truck/armyTruckPrefab.prefab"/>
+to
+<property name="Meshfile" value="#Entities/Vehicles?jeep_Prefab.prefab"/>

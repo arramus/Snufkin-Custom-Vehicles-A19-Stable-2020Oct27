@@ -1,0 +1,4 @@
+<configs>
+    <!--append xpath="/windows/window[@name='windowVehicleStorage']/grid[@name='inventory']/@rows">10</append>
+    <append xpath="/windows/window[@name='windowVehicleStorage']/grid[@name='inventory']/@cols">10</append-->
+</configs>
